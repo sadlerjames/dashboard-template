@@ -1,4 +1,4 @@
-# The Coders Zone Dashboard - Node and Vue
+# Dashboard - Node and Vue
 This is a Node and Vue powered dashboard for The Coders Zone.
 
 To get this dashboard up and running locally:
