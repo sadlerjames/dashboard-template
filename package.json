@@ -1,0 +1,28 @@
+{
+  "name": "dashboard-v5",
+  "version": "1.0.0",
+  "description": "Node and Vue powered dashboard for The Coders Zone",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sadlerjames/dashboard-v5.git"
+  },
+  "keywords": [
+    "node",
+    "vue",
+    "dashboard"
+  ],
+  "author": "SadlerJ",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sadlerjames/dashboard-v5/issues"
+  },
+  "homepage": "https://github.com/sadlerjames/dashboard-v5#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1"
+  }
+}
