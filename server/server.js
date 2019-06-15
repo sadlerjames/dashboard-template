@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 //require the api
-//require(__dirname + './routes')(app, bodyParser);
+//require(__dirname + '/routes')(app, bodyParser);
 
 //send file
 app.get('/', function(req, res) {
