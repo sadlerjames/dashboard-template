@@ -9,3 +9,5 @@ To get this dashboard up and running locally:
 - `npm install`
 3. Start the server
 - `npm start`
+
+However, if you would like to use this repository as a template then click on the "Use this template" button and follow the required steps.
