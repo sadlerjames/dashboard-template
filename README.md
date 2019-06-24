@@ -4,7 +4,7 @@ The purpose of this is just a template that can be used in other projects.
 
 To get this dashboard up and running locally:
 1. Clone the repository 
-- `git clone https://github.com/sadlerjames/dashboard-v5`
+- `git clone https://github.com/sadlerjames/dashboard-template`
 2. Install the npm packages
 - `npm install`
 3. Start the server
