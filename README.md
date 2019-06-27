@@ -11,3 +11,9 @@ To get this dashboard up and running locally:
 - `npm start`
 
 However, if you would like to use this repository as a template then click on the "Use this template" button and follow the required steps.
+
+Once you have setup your new repository you will need to create a .env file and add the following code to it but replace the required details with your details:
+
+```
+SECRET_KEY = "<--Your Secret Key (It can be anything that you want)-->"
+```
