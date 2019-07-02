@@ -1,7 +1,6 @@
 <template>
-    <div id="app">
-      <router-view></router-view>
-      <b-navbar toggleable="lg" type="dark" variant="info">
+    <div id="main">
+      <b-navbar toggleable="lg" type="dark" variant="danger">
         <b-navbar-brand href="#">Dashboard Template</b-navbar-brand>
 
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
