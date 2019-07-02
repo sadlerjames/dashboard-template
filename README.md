@@ -3,17 +3,14 @@ This is a Node and Vue powered dashboard that consists of a Login and Signup for
 The purpose of this is just a template that can be used in other projects.
 
 To get this dashboard up and running locally:
-1. Clone the repository 
+1. Clone the repository
 - `git clone https://github.com/sadlerjames/dashboard-template`
-2. Install the npm packages
-- `npm install`
-3. Start the server
+2. Install the npm packages for the backend and the frontend
+- `npm run post-install`
+3. Start the dashboard
 - `npm start`
 
-However, if you would like to use this repository as a template then click on the "Use this template" button and follow the required steps.
+However, if you would like to use this repository as a template then click on the "Use this template" button and follow the required steps. After following the steps follow steps two and three above.
 
-Once you have setup your new repository you will need to create a .env file and add the following code to it but replace the required details with your details:
-
-```
-SECRET_KEY = "<--Your Secret Key (It can be anything that you want)-->"
-```
+Everytime you want to run the dashboard, run:
+- `npm start`
