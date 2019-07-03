@@ -7,8 +7,8 @@
 
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav>
-            <b-nav-item href="#">About</b-nav-item>
-            <b-nav-item href="login">Login</b-nav-item>
+            <b-nav-item to="/#">About</b-nav-item>
+            <b-nav-item to="/login">Login</b-nav-item>
           </b-navbar-nav>
 
           <!-- Right aligned nav items -->
@@ -24,8 +24,11 @@
           </b-navbar-nav>
         </b-collapse>
       </b-navbar>
+      <template v-if="$route.matched.length">
+        <router-view></router-view>
+      </template>
     </div>
-  
+
 </template>
 
 <script>
