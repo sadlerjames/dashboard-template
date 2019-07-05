@@ -1,10 +1,11 @@
 <template>
   <div>
-    <b-form @submit="onSubmit" v-if="show">
-      <b-form-group id="email-group" type="email" label="Email Address:" label-for="email">
+    <b-form @submit.prevent="onSubmit">
+      <b-form-group id="email-group" label="Email Address:" label-for="email">
         <b-form-input
           id="email"
           v-model="form.email"
+          type="email"
           required
           placeholder="Enter your email address"
         ></b-form-input>
@@ -14,6 +15,7 @@
         <b-form-input
           id="password"
           v-model="form.password"
+          type="password"
           required
           placeholder="Enter your password"
         ></b-form-input>
@@ -37,9 +39,10 @@ export default {
     };
   },
   methods: {
-    onSubmit(evt) {
-      evt.preventDefault()
-      alert(JSON.stringify(this.form))
+    onSubmit() {
+      auth.login(this.form.email, this.form.password, (data) => {
+        alert(data.success);
+      });
     }
   }
 };

@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 const jwt = require('jsonwebtoken')
 const path = require('path')
 const history = require('connect-history-api-fallback')
+const bcrypt = require('bcrypt')
 const port = 3000
 
 //initalise express and routes
