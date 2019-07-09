@@ -15,5 +15,7 @@ However, if you would like to use this repository as a template then click on th
 Everytime you want to run the dashboard, run:
 - `npm start`
 
+# Documentation
+
 Front End [Documentation](https://github.com/sadlerjames/dashboard-template/tree/master/client)
 Back End [Docmentation](https://github.com/sadlerjames/dashboard-template/tree/master/server) 
