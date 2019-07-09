@@ -1,6 +1,6 @@
-# client
+# Front End Documentation
 
-> dashboard frontend
+> Documentation and notes for the frontend
 
 ## Build Setup
 
