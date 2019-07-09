@@ -1,47 +1,56 @@
-const mysql = require('mysql');
+const Sequelize = require('sequelize')
+const sequelize = require('../../utils/sequelize').sequelize;
 
-var conx = mysql.createConnection({
-    host: 'sql304.thecoderszone.com',
-    user: 'thcdr_23594181',
-    password: 'root',
-    database: 'thcdr_23594181_test'
-});
+const Model = Sequelize.Model;
+class User extends Model { }
+User.init({
+    // attributes
+    email: {
+        type: Sequelize.STRING,
+        allowNull: false
+
+    },
+    password: {
+        type: Sequelize.STRING,
+        allowNull: false
+
+    }
+}, {
+        sequelize,
+        modelName: 'user'
+        // options
+    });
 
 module.exports = {
-    create: function(email, password, callback) {
+    create: function (inemail, inpassword) {
         try {
-            conx.connect(function(err) {
-                if (err) throw err;
-                console.log("Connected!");
-                //Insert a record in the users table:
-                var sql = "INSERT INTO users (email, password) VALUES (?, ?)";
-                conx.query(sql, [email, password], function(err, result) {
-                    if (err) throw err;
-                    console.log("1 record inserted");
-                });
+            User.create({ email: inemail, password: inpassword }).then(success => {
+                console.log("Users generated ID:", success.id);
             });
 
         } catch (err) {
             // pass any errors on
             callback(err);
         }
-    },
-    login: function(email) {
+    }, 
+    allinfo: function (inemail) {
         try {
-            conx.connect(function(err) {
-                if (err) throw err;
-                //Get users info from the database:
-                var sql = 'SELECT * FROM users WHERE email = ?';
-                conx.query(sql, [email], function(err, result) {
-                    if (err) throw err;
-                    return results;
-
-                });
-            });
-
+            let userinfo;
+            return User.findAll({
+                where: {
+                  email: inemail
+                }
+              }).then(info => {
+                return userinfo = JSON.stringify(info, null, 4);
+                //console.log("All the info on the user:", JSON.stringify(info, null, 4))
+                //console.log(userinfo);
+              });
+              //console.log(userinfo);
+              //return(userinfo);
+              
         } catch (err) {
             // pass any errors on
-            callback(err);
+            console.log(err);
         }
     }
 

@@ -1,7 +1,7 @@
 {
-  "name": "dashboard-v5",
+  "name": "dashboard-template",
   "version": "1.0.0",
-  "description": "Node and Vue powered dashboard for The Coders Zone",
+  "description": "Node and Vue powered dashboard template",
   "main": "index.js",
   "scripts": {
     "start": "cd client && npm run build && cd .. && node server.js",
@@ -29,6 +29,7 @@
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
+    "mysql": "^2.17.1",
     "mysql2": "^1.6.5",
     "sequelize": "^5.9.4",
     "underscore": "^1.9.1"

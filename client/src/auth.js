@@ -9,5 +9,14 @@ export default {
           }));
         let data = await response.data;
         next(data);
-    }
+    }, 
+    async signup(email, password, next) {
+      let response = await axios.post('/api/v1/user/signup', querystring.stringify({
+          email: email,
+          password: password
+        }));
+      let data = await response.data;
+      next(data);
+  }
+
   }
