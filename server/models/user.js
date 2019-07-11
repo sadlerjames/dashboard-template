@@ -21,11 +21,12 @@ User.init({
         // options
     });
 
+
 module.exports = {
-    create: function (inemail, inpassword) {
+    create: function (inemail, inpassword, callback) {
         try {
             User.create({ email: inemail, password: inpassword }).then(success => {
-                console.log("Users generated ID:", success.id);
+                callback(success);
             });
 
         } catch (err) {
@@ -33,24 +34,27 @@ module.exports = {
             callback(err);
         }
     }, 
-    allinfo: function (inemail) {
+    /**
+
+   * Returns the user's email, password, createdAt and updatedAt values from the database
+
+   *
+
+   * @param {Request} req http request object, i.e. request from user
+
+   * @param {Response} res http response object, i.e. response to send to user
+
+   * @param {Function} callback function to call afterwards
+
+   */
+    allinfo: function (inemail, callback) {
         try {
-            let userinfo;
-            return User.findAll({
-                where: {
-                  email: inemail
-                }
-              }).then(info => {
-                return userinfo = JSON.stringify(info, null, 4);
-                //console.log("All the info on the user:", JSON.stringify(info, null, 4))
-                //console.log(userinfo);
-              });
-              //console.log(userinfo);
-              //return(userinfo);
-              
+            User.findAll({where: {email: inemail}}).then(function(result){
+                callback(result[0]);
+            });
         } catch (err) {
             // pass any errors on
-            console.log(err);
+            callback(err);
         }
     }
 

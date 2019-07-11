@@ -9,9 +9,11 @@ module.exports = {
     login: function (req, res) {
         try {
             let email = req.body.email;
-            let password = req.body.password;
-            let response = allinfo(email);
-            console.log(response);
+            let inputedpassword = req.body.password;
+            allinfo(email, function(r) {
+                // Where "r" is the result of the callback
+                console.log(r);
+            });
             /**
             const user = {
                 id : id,

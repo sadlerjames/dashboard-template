@@ -5,8 +5,12 @@ const bodyParser = require('body-parser')
 const jwt = require('jsonwebtoken')
 const path = require('path')
 const mysql = require('mysql')
+const dotenv = require('dotenv')
 const history = require('connect-history-api-fallback')
-const port = 3000
+
+require('dotenv').config(); //setup .env file
+
+const port = process.env.port || 3000;
 
 //initalise express and routes
 app.use(express.static('client'));
@@ -20,7 +24,7 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname + '/client/index.html'))
 });
 
-require('dotenv').config(); //get the secret key from the env file
+
 app.set('SECRET_KEY', process.env.SECRET_KEY); // jwt secret key used for signing/verification
 
 const user = require('./server/routes/user');
