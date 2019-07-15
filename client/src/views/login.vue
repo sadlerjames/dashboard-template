@@ -41,7 +41,11 @@ export default {
   methods: {
     onSubmit() {
       auth.login(this.form.email, this.form.password, (data) => {
-        alert(data.success);
+        if (data === true){
+          this.$router.push('/');
+        } else {
+          alert("false");
+        }
       });
     }
   }

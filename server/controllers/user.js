@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const usermodel = require('../models/user');
 const allinfo = require('../models/user').allinfo;
+const verifyToken = require('../middleware/verifyToken').verifyToken;
 
 let saltRounds = 10;
 
@@ -10,9 +11,22 @@ module.exports = {
         try {
             let email = req.body.email;
             let inputedpassword = req.body.password;
-            allinfo(email, function(r) {
-                // Where "r" is the result of the callback
-                console.log(r);
+            allinfo(email, function (r) {
+                //r is the result of the callback
+                if (r === undefined || r.length == 0) {
+                    // array empty or does not exist
+                    res.json({
+                        success: false
+                    });
+                } else {
+                    console.log("array contains info");
+                    jwt.sign({ r }, 'secretkey', (err, token) => {
+                        res.json({
+                            success: true,
+                            data: { token: token }
+                        });
+                    });
+                }
             });
             /**
             const user = {
@@ -42,7 +56,7 @@ module.exports = {
     },
 
     create: function (req, res, callback) {
-        try{
+        try {
             let email = req.body.email;
             let password = req.body.password;
             usermodel.create(email, password);
@@ -51,6 +65,28 @@ module.exports = {
             callback(err);
         }
 
+    },
+
+    request: function (req, res, callback) {
+        try {
+            let token = verifyToken(req, res);
+            jwt.verify(token, 'secretkey', (err, authData) => {
+                if (err) {
+                    res.sendStatus(403);
+                } else {
+                    res.json({
+                        message: 'post created',
+                        authData
+                    })
+                }
+
+            });
+
+        } catch (err) {
+            callback(err);
+        }
+
     }
+
 
 };

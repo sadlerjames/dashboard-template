@@ -28,9 +28,6 @@
       <template v-if="$route.matched.length">
         <router-view></router-view>
       </template>
-      <template v-if="!($route.matched.length)">
-        <h1>Welcome to the dashboard</h1>
-      </template>
     </div>
 
 </template>
