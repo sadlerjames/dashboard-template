@@ -1,6 +1,7 @@
 <template>
   <div>
-    <b-form @submit.prevent="onSubmit">
+    <h1 class="text-center">Login</h1>
+    <b-form @submit.prevent="onSubmit" class="mx-auto" style="width: 32%;">
       <b-form-group id="email-group" label="Email Address:" label-for="email">
         <b-form-input
           id="email"
@@ -20,6 +21,7 @@
           placeholder="Enter your password"
         ></b-form-input>
       </b-form-group>
+      {{ message }}
       <b-button type="submit" variant="primary">Login</b-button>
     </b-form>
   </div>
@@ -35,16 +37,17 @@ export default {
       form: {
         email: "",
         password: ""
-      }
+      },
+      message: ""
     };
   },
   methods: {
     onSubmit() {
-      auth.login(this.form.email, this.form.password, (data) => {
-        if (data === true){
-          this.$router.push('/');
+      auth.login(this.form.email, this.form.password, data => {
+        if (data === true) {
+          this.$router.push("/");
         } else {
-          alert("false");
+          this.message = "The email/password that you entered was incorrect";
         }
       });
     }

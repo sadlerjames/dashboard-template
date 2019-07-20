@@ -6,6 +6,9 @@ import VueRouter from 'vue-router'
 //import custom css
 import './assets/scss/custom.scss'
 
+//import custom files
+import auth from "./auth.js";
+
 //pages
 import App from './App.vue'
 import Login from './views/login.vue'
@@ -24,7 +27,20 @@ const router = new VueRouter({
   routes: [
     { path: '/', component: Dashboard },
     { path: '/login', component: Login },
-    { path: '/about', component: About },
+    {
+      path: '/about', component: About, async beforeEnter(to, from, next) {
+        let token = auth.getToken();
+        if (token === true) {
+          console.log("success");
+          next()
+        } else {
+          next({
+            name: "/login" // back to safety route //
+          });
+        }
+      
+      }
+    },
     { path: '/signup', component: Signup }
   ]
 })
@@ -35,4 +51,4 @@ new Vue({
   render: h => h(App)
 })
 
-export {store};
+export { store };

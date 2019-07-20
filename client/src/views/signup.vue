@@ -1,6 +1,7 @@
 <template>
   <div>
-    <b-form @submit.prevent="onSubmit">
+    <h1 class="text-center">Sign Up</h1>
+    <b-form @submit.prevent="onSubmit" class="mx-auto" style="width: 32%;">
       <b-form-group id="email-group" label="Email Address:" label-for="email">
         <b-form-input
           id="email"
@@ -40,8 +41,12 @@ export default {
   },
   methods: {
     onSubmit() {
-      auth.signup(this.form.email, this.form.password, (data) => {
-        console.log(data.success);
+      auth.create(this.form.email, this.form.password, (data) => {
+        if (data === true) {
+          this.$router.push("/");
+        } else {
+          this.message = "There was an error in signing you up, please try again!";
+        }
       });
     }
   }

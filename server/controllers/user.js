@@ -19,13 +19,21 @@ module.exports = {
                         success: false
                     });
                 } else {
-                    console.log("array contains info");
-                    jwt.sign({ r }, 'secretkey', (err, token) => {
-                        res.json({
-                            success: true,
-                            data: { token: token }
+                    let dbpassword = r.password;
+                    if (dbpassword == inputedpassword) {
+                        jwt.sign({ r }, 'secretkey', (err, token) => {
+                            res.json({
+                                success: true,
+                                data: { token: token }
+                            });
                         });
-                    });
+                    } else {
+                        res.json({
+                            success: false,
+                            data: null
+                        });
+                    }
+
                 }
             });
             /**
@@ -57,12 +65,36 @@ module.exports = {
 
     create: function (req, res, callback) {
         try {
+            console.log("creating");
             let email = req.body.email;
-            let password = req.body.password;
-            usermodel.create(email, password);
-
+            let inputedpassword = req.body.password;
+            let response = usermodel.create(email, password);
+            console.log(response);
+            
+            /**
+            const user = {
+                id : id,
+                email: email
+            }
+            */
+            //let passhashinputed = bcrypt.hashSync(password, saltRounds);
+            //let dbpassword = usermodel.login(email);
+            /**
+            if (email && password){
+                //compare the password in the database vs the password that the user entered
+                let compare = bcrypt.compareSync(dbpassword, passhashinputed);
+                if (compare == true){
+                    res.json({success: true});
+                } else{
+                    res.json({success: false});
+                }
+            } else {
+                res.json({success: false});
+            }
+            */
         } catch (err) {
-            callback(err);
+            // pass any errors on
+            console.log(err);
         }
 
     },
