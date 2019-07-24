@@ -2,6 +2,7 @@
 import axios from 'axios'
 import querystring from 'querystring'
 import cookies from 'js-cookie'
+import { isset } from './utils/isset'
 
 export default {
   async login(email, password, next) {
@@ -45,7 +46,5 @@ export default {
       next(data["success"]);
     }
   }
-
-
 
 }

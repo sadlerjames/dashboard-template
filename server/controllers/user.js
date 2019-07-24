@@ -84,27 +84,7 @@ module.exports = {
         }
 
     },
-
-    request: function (req, res, callback) {
-        try {
-            let token = verifyToken(req, res);
-            jwt.verify(token, 'secretkey', (err, authData) => {
-                if (err) {
-                    res.sendStatus(403);
-                } else {
-                    res.json({
-                        message: 'post created',
-                        authData
-                    })
-                }
-
-            });
-
-        } catch (err) {
-            callback(err);
-        }
-
+    logout: function (req, res) {
+        
     }
-
-
 };
