@@ -21,6 +21,7 @@
           placeholder="Enter your password"
         ></b-form-input>
       </b-form-group>
+      {{ message }}
       <b-button type="submit" variant="primary">Sign Up</b-button>
     </b-form>
   </div>
@@ -36,7 +37,8 @@ export default {
       form: {
         email: "",
         password: ""
-      }
+      },
+      message: ""
     };
   },
   methods: {

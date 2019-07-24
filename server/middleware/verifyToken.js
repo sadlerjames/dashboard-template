@@ -11,7 +11,7 @@ module.exports = {
             const bearer = bearerHeader.split(' ');
             // Get token from array
             const bearerToken = bearer[1];
-
+            //return the jwt token
             return bearerToken;
             /** 
             //set the token

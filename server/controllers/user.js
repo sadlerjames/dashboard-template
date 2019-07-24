@@ -4,16 +4,18 @@ const usermodel = require('../models/user');
 const allinfo = require('../models/user').allinfo;
 const verifyToken = require('../middleware/verifyToken').verifyToken;
 
+//set the required settings for encrypting the passwords
 let saltRounds = 10;
 let salt = bcrypt.genSaltSync(saltRounds);
 
 module.exports = {
     login: function (req, res) {
         try {
+            //get the email that is submitted from the front end and store it in a variable
             let email = req.body.email;
+            //get the password that is submitted from the front end and store it in a variable
             let password = req.body.password;
-            //let email = "test@test.com";
-            //let inputedpassword = "test";
+            //call the all info function, with the email variable in the parameter
             allinfo(email, function (r) {
                 //r is the result of the callback
                 if (r === undefined || r.length == 0) {
@@ -22,16 +24,21 @@ module.exports = {
                         success: false
                     });
                 } else {
+                    //get the password stored in the database that matches the email entered
                     let dbpassword = r.password;
+                    //compare the inputed password to the hashed password in the database
                     let compare = bcrypt.compareSync(password, dbpassword);
                     if (compare === true) {
+                        //create a json web token
                         jwt.sign({ r }, 'secretkey', (err, token) => {
+                            //send the success (true) back to the front end along with the jwt token
                             res.json({
                                 success: true,
                                 data: { token: token }
                             });
                         });
                     } else {
+                        //send error response to front end
                         res.json({
                             success: false,
                             data: null
@@ -40,27 +47,6 @@ module.exports = {
 
                 }
             });
-            /**
-            const user = {
-                id : id,
-                email: email
-            }
-            */
-            //let passhashinputed = bcrypt.hashSync(password, saltRounds);
-            //let dbpassword = usermodel.login(email);
-            /**
-            if (email && password){
-                //compare the password in the database vs the password that the user entered
-                let compare = bcrypt.compareSync(dbpassword, passhashinputed);
-                if (compare == true){
-                    res.json({success: true});
-                } else{
-                    res.json({success: false});
-                }
-            } else {
-                res.json({success: false});
-            }
-            */
         } catch (err) {
             // pass any errors on
             console.log(err);
@@ -81,24 +67,17 @@ module.exports = {
                         success: false
                     });
                 } else {
-                    console.log(r);
+                    //create a json web token
+                    jwt.sign({ r }, 'secretkey', (err, token) => {
+                        //send the success (true) back to the front end along with the jwt token
+                        res.json({
+                            success: true,
+                            data: { token: token }
+                        });
+                    });
 
                 }
             });
-            
-            /**
-            if (email && password){
-                //compare the password in the database vs the password that the user entered
-                let compare = bcrypt.compareSync(dbpassword, passhashinputed);
-                if (compare == true){
-                    res.json({success: true});
-                } else{
-                    res.json({success: false});
-                }
-            } else {
-                res.json({success: false});
-            }
-            */
         } catch (err) {
             // pass any errors on
             console.log(err);
