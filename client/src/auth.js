@@ -21,15 +21,7 @@ export default {
       next(data["success"]);
     }
   },
-  getToken() {
-    let token = cookies.get('user-m');
-    if (isset(() => token)) {
-      return true;
-    } else {
-      return false;
-    }
-  },
-
+  
   async create(email, password, next) {
     let response = await axios.post('/api/v1/user/create', querystring.stringify({
       email: email,
@@ -44,6 +36,15 @@ export default {
       next(data["success"]);
     } else {
       next(data["success"]);
+    }
+  },
+
+  getToken() {
+    let token = cookies.get('user-m');
+    if (token === undefined || token.length == 0) {
+      return false;
+    } else {
+      return true;
     }
   }
 

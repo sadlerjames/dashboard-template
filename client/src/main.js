@@ -43,17 +43,28 @@ function logout(to, from, next){
   }
 }
 
+function loggedIn(to, from, next){
+  let token = auth.getToken();
+  if(token === true) {
+    next('/'); // go to 'dashboard';
+  } else{
+    next();
+  }
+}
+
 
 //setup the paths
 const router = new VueRouter({
   mode: 'history',
   base: __dirname,
   routes: [
-    { path: '/', component: Dashboard },
-    { path: '/login', component: Login },
-    {path: '/about', beforeEnter: guard, component: About},
-    { path: '/signup', component: Signup },
-    {path: '/logout', beforeEnter: logout, component: Logout}
+    //to make a route protected (the user has to be logged in), add     beforeEnter: guard      into the line after the path is specified
+    //example:     {path: '/', beforeEnter: guard, component: About}
+    { path: '/', beforeEnter: guard, component: Dashboard },
+    { path: '/login', beforeEnter: loggedIn, component: Login },
+    { path: '/about', beforeEnter: guard, component: About},
+    { path: '/signup', beforeEnter: loggedIn, component: Signup },
+    { path: '/logout', beforeEnter: logout, component: Logout}
   ]
 })
 

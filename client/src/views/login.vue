@@ -21,7 +21,7 @@
           placeholder="Enter your password"
         ></b-form-input>
       </b-form-group>
-      {{ message }}
+      <p>{{ message }}</p>
       <b-button type="submit" variant="primary">Login</b-button>
     </b-form>
   </div>
@@ -29,7 +29,6 @@
 
 <script>
 import auth from "../auth";
-
 export default {
   name: "app",
   data() {
