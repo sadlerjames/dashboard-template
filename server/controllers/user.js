@@ -5,12 +5,15 @@ const allinfo = require('../models/user').allinfo;
 const verifyToken = require('../middleware/verifyToken').verifyToken;
 
 let saltRounds = 10;
+let salt = bcrypt.genSaltSync(saltRounds);
 
 module.exports = {
     login: function (req, res) {
         try {
             let email = req.body.email;
-            let inputedpassword = req.body.password;
+            let password = req.body.password;
+            //let email = "test@test.com";
+            //let inputedpassword = "test";
             allinfo(email, function (r) {
                 //r is the result of the callback
                 if (r === undefined || r.length == 0) {
@@ -20,7 +23,8 @@ module.exports = {
                     });
                 } else {
                     let dbpassword = r.password;
-                    if (dbpassword == inputedpassword) {
+                    let compare = bcrypt.compareSync(password, dbpassword);
+                    if (compare === true) {
                         jwt.sign({ r }, 'secretkey', (err, token) => {
                             res.json({
                                 success: true,
@@ -63,22 +67,25 @@ module.exports = {
         }
     },
 
-    create: function (req, res, callback) {
+    create: function (req, res) {
         try {
             console.log("creating");
             let email = req.body.email;
-            let inputedpassword = req.body.password;
-            let response = usermodel.create(email, password);
-            console.log(response);
+            let password = req.body.password;
+            let hashpass = bcrypt.hashSync(password, salt);
+            usermodel.create(email, hashpass, function (r) {
+                //r is the result of the callback
+                if (r === undefined || r.length == 0) {
+                    // array empty or does not exist
+                    res.json({
+                        success: false
+                    });
+                } else {
+                    console.log(r);
+
+                }
+            });
             
-            /**
-            const user = {
-                id : id,
-                email: email
-            }
-            */
-            //let passhashinputed = bcrypt.hashSync(password, saltRounds);
-            //let dbpassword = usermodel.login(email);
             /**
             if (email && password){
                 //compare the password in the database vs the password that the user entered

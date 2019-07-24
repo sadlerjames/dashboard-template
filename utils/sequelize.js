@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize')
 
-const sequelize = new Sequelize('dashboard_template', 'root', 'root', {
+const sequelize = new Sequelize('dashboard-template', 'root', 'root', {
   host: 'localhost',
   dialect: 'mysql'
 })
