@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize')
-const sequelize = require('../../utils/sequelize').sequelize;
+const sequelize = require('../utils/sequelize').sequelize;
 
 const Model = Sequelize.Model;
 class User extends Model { }
