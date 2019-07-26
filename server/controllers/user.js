@@ -4,6 +4,8 @@ const usermodel = require('../models/user');
 const allinfo = require('../models/user').allinfo;
 const verifyToken = require('../middleware/verifyToken').verifyToken;
 
+require('dotenv').config();
+
 //set the required settings for encrypting the passwords
 let saltRounds = 10;
 let salt = bcrypt.genSaltSync(saltRounds);
@@ -30,7 +32,7 @@ module.exports = {
                     let compare = bcrypt.compareSync(password, dbpassword);
                     if (compare === true) {
                         //create a json web token
-                        jwt.sign({ r }, 'secretkey', (err, token) => {
+                        jwt.sign({ r }, process.env.SECRET_KEY, (err, token) => {
                             //send the success (true) back to the front end along with the jwt token
                             res.json({
                                 success: true,
@@ -68,7 +70,7 @@ module.exports = {
                     });
                 } else {
                     //create a json web token
-                    jwt.sign({ r }, 'secretkey', (err, token) => {
+                    jwt.sign({ r }, process.env.SECRET_KEY, (err, token) => {
                         //send the success (true) back to the front end along with the jwt token
                         res.json({
                             success: true,
@@ -86,5 +88,14 @@ module.exports = {
     },
     logout: function (req, res) {
         
+    },
+    getauthdata: function (req, res) {
+        jwt.verify(req.body.cookie, process.env.SECRET_KEY, (err, authData) => {
+            res.json({
+                success: true,
+                data: { auth: authData }
+            });
+          });
     }
+    
 };

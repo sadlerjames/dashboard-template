@@ -28,12 +28,10 @@
 </template>
 
 <script>
-import cookies from "js-cookie";
-const jwt = require("jsonwebtoken");
+import auth from "../auth";
+import cookies from 'js-cookie'
 
 let cookie = cookies.get("user-m");
-//const bearer = cookie.split(' ');
-//const token = bearer[1];
 
 export default {
   name: "Nav",
@@ -44,8 +42,8 @@ export default {
   },
   methods: {
     getName: function() {
-      jwt.verify(cookie, "secretkey", (err, authData) => {
-        let email = authData.r.email;
+      auth.getAuthData(cookie, data => {
+        let email = data.data.auth.r.email;
         this.name = email;
       });
     }

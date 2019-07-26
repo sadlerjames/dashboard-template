@@ -13,12 +13,6 @@ module.exports = {
             const bearerToken = bearer[1];
             //return the jwt token
             return bearerToken;
-            /** 
-            //set the token
-            req.token = bearerToken;
-            //Next middleware
-            next();
-            */
         }else{
             res.sendStatus(403);
         }
