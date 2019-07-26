@@ -6,18 +6,18 @@ To compile this from source you need Node.js installed.
 
 To get this dashboard up and running locally:
 1. Clone the repository
-- `git clone https://github.com/sadlerjames/dashboard-template`
+ `git clone https://github.com/sadlerjames/dashboard-template`
 2. Install the npm packages for the backend and the frontend
-- `npm run post-install`
+ `npm run post-install`
 4. You need to create a `.env` file where you installed the project, and put the following info in it but replacing it with your own details:
-- `SECRET_KEY = "<--Replace with random text (no spaces in it)-->"
-PORT = 3000
+ `SECRET_KEY = "<--Replace with random text (no spaces in it)-->"`
+`PORT = 3000`
 
-DB_HOST = "<--Replace with your database host-->"
-DB_USERNAME = "<--Replace with your database username-->"
-DB_PASSWORD = "<--Replace with your database password-->"
-DB_NAME = "<--Replace with your database name-->"
-DB_DIALECT = "<--Replace with your database dialect (e.g. mysql, sqlite ...)-->"`
+`DB_HOST = "<--Replace with your database host-->"`
+`DB_USERNAME = "<--Replace with your database username-->"`
+`DB_PASSWORD = "<--Replace with your database password-->"`
+`DB_NAME = "<--Replace with your database name-->"`
+`DB_DIALECT = "<--Replace with your database dialect (e.g. mysql, sqlite ...)-->"`
 3. Start the dashboard
 - `npm start`
 4. Finally go to http://localhost:3000/ to see the project!
