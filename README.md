@@ -2,7 +2,17 @@
 This is a Node and Vue powered dashboard that consists of a Login and Signup form as well as a dashboard for the user to interact with.
 The purpose of this is just a template that can be used in other projects.
 
-To compile this from source you need Node.js installed.
+To compile this from source you need Node.js installed. You will also need to have a database setup, with a table called users. To create this table run the following command:
+
+```
+CREATE TABLE users(
+    id INT,
+    email VARCHAR(255),
+    password VARCHAR(255),
+    createdAt VARCHAR(255),
+    updatedAt VARCHAR(255)
+);
+```
 
 To get this dashboard up and running locally:
 1. Clone the repository
