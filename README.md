@@ -47,3 +47,7 @@ Everytime you want to run the dashboard, run:
 
 `npm start`
 
+If you want to run it with nodemon enabled, run:
+
+`npm run dev`
+
